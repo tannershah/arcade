@@ -1,3 +1,5 @@
+For a Hackathon in 2023.
+
 Made in around 2 hours using Node.js
 
 Access live site at https://lateral-harvest-spirit.glitch.me
