@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Retro Arcade</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Multiplayer Online Arcade" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+    <script src="phaser.min.js"></script>
+    <style>
+      body{
+            background-color: #000000;
+        }
+      .center-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+      }
+      header {
+            background-color: #f31919;
+            color: #f0f14e;
+            padding: 0px;
+            margin-top: -50px;
+            text-align: center;
+            font-size: 75px;
+            font-family: 'VT323', sans-serif;
+        }
+        .game-button {
+            display: inline-block;
+            font-family: 'VT323', sans-serif;
+            background-color: #007BFF;
+            text-decoration: none;
+            color: #fff;
+            padding: 15px 15px;
+            margin: 20px;
+            border: none;
+            border-radius:
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .game-button img {
+            height: 300px;
+            width: 300px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .game-button:hover {
+            background-color: #0056b3;
+        }
+
+        .game-description {
+            margin-top: 10px; /* Add space between image and description */
+        }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Retro Arcade</h1>
+    </header>
+    <div class="center-container" id="button-container">
+      <a class="game-button" id="pongButton">
+        <img
+          src="https://cdn.glitch.global/94044af4-de68-42e5-be70-c7aa041456a0/Screenshot%202023-11-03%20at%201.18.56%20PM.png?v=1699032795109"
+          alt="Pong"
+        />
+        <figcaption class="game-description">Pong</figcaption>
+      </a>
+
+      <a class="game-button" id="rockButton">
+        <img
+          src="https://cdn.glitch.global/94044af4-de68-42e5-be70-c7aa041456a0/Screenshot%202023-11-03%20at%201.20.42%20PM.png?v=1699032797668"
+          alt="Rock Paper Scissors"
+        />
+        <figcaption class="game-description">Rock Paper Scissors</figcaption>
+      </a>
+    </div>
+    <script>
+      class rockScene extends Phaser.Scene {
+        constructor() {
+          super("rockScene");
+        }
+        preload() {
+          console.log("Preload method in rockScene executed");
+          this.load.image(
+            "rock",
+            "https://cdn.glitch.global/0482f76a-602f-4aa5-8afc-861af9eaa854/Screenshot%202023-11-04%20at%204.13.27%20PM.png?v=1699128861663"
+          );
+          this.load.image(
+            "paper",
+            "https://cdn.glitch.global/0482f76a-602f-4aa5-8afc-861af9eaa854/Screenshot%202023-11-04%20at%204.13.35%20PM.png?v=1699128864338"
+          );
+          this.load.image(
+            "scissors",
+            "https://cdn.glitch.global/0482f76a-602f-4aa5-8afc-861af9eaa854/Screenshot%202023-11-04%20at%204.13.44%20PM.png?v=1699128862877"
+          );
+        }
+        create(){
+          console.log("Create method in rockScene executed");
+          const rock = this.add.image(200, 200, "rock").setInteractive();
+          const paper = this.add.image(400, 200, "paper").setInteractive();
+          const scissors = this.add.image(600, 200, "scissors").setInteractive();
+          
+        }
+      }
+      class pongScene extends Phaser.Scene {
+        constructor() {
+          super("pongScene");
+        }
+
+        preload() {}
+
+        create() {}
+        
+      }
+      const config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        scene: ["rockScene", "pongScene"],
+      };
+
+      const game = new Phaser.Game(config);
+      
+      console.log("Event listeners setting up...");
+      document
+        .getElementById("pongButton")
+        .addEventListener("click", function () {
+          console.log("Pong button clicked...");
+          document.getElementById("button-container").style.display = "none";
+          window.location.href = "/pong.html";
+          //game.scene.start("pongScene");
+        });
+      document
+        .getElementById("rockButton")
+        .addEventListener("click", function () {
+          console.log("Rock button clicked...");
+          document.getElementById("button-container").style.display = "none";
+          game.scene.start("rockScene");
+        });
+    </script>
+  </body>
+</html>
